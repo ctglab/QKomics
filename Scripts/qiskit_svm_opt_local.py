@@ -58,6 +58,7 @@ ts_size=int(args['test_size'])#test
 #C ranges
 Cheese= [0.1, 0.5, 1, 5, 10,100,1000]
 
+#TO CHANGE
 ###Data loading and processing###############################
 xlr = pd.read_csv("test_xlr.txt", sep = "\t")
 
@@ -80,6 +81,7 @@ scaler.fit(X_train)
 
 X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
+
 ###SET Quantum kernel####################
 feature_map = ZZFeatureMap(feature_dimension=len(features), reps=2, entanglement="linear")
 

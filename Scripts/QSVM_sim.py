@@ -8,6 +8,8 @@ from datetime import datetime
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
 
 from qiskit import BasicAer
 from qiskit.circuit.library import ZZFeatureMap
@@ -20,7 +22,9 @@ seed = 12345
 algorithm_globals.random_seed = seed
 
 
-# %%
+#############################################################################################################################
+#                              LOAD AND PREPARE DATASET                                                                     #
+#############################################################################################################################
 xlr = pd.read_csv("/CTGlab/home/elia/qiskit test/dataset/test_xlr.txt", sep = "\t")
 nsd = pd.read_csv("/CTGlab/home/elia/qiskit test/dataset/test_nsd.txt", sep = "\t")
 sd = pd.read_csv("/CTGlab/home/elia/qiskit test/dataset/test_sd.txt", sep = "\t")
@@ -44,7 +48,10 @@ sd_scaled = scaler.transform(sd[features])
 y_nsd = nsd[labels]
 y_sd = sd[labels]
 
-# %%
+#############################################################################################################################
+#                              FEATURE MAP  AND KERNEL PREPARATION                                                          #
+#############################################################################################################################
+#ft map
 feature_map = ZZFeatureMap(feature_dimension=len(features), reps=2, entanglement="linear")
 
 adhoc_backend = QuantumInstance(
@@ -52,44 +59,24 @@ adhoc_backend = QuantumInstance(
 
 adhoc_kernel = QuantumKernel(feature_map=feature_map, quantum_instance=adhoc_backend)
 
-# %%
-normal_svc = SVC(kernel = "rbf", C= 20)
-time_classic=datetime.now()
-normal_svc.fit(X_train_scaled, y_train)
-print('tempo esecuzione:', datetime.now()-time_classic)
-
-
-# %%
-'''
-xlr_eval, _, y_xlr_eval, _ = train_test_split(X_test_scaled, y_test, train_size= 500, random_state=89,stratify=y_test)
-nsd_eval, _, y_nsd_eval, _ = train_test_split(nsd_scaled, y_nsd, train_size= 500, random_state=89,stratify=y_nsd)
-sd_eval, _, y_sd_eval, _ = train_test_split(sd_scaled, y_sd, train_size= 500, random_state=89,stratify=y_sd)
-
-# %%
-normal_score_xlr = normal_svc.score(xlr_eval, y_xlr_eval)
-normal_score_nsd = normal_svc.score(nsd_eval, y_nsd_eval)
-normal_score_sd = normal_svc.score(sd_eval, y_sd_eval)
-print(f"RBF kernel classification test score XLR: {normal_score_xlr}")
-print(f"RBF kernel classification test score NSD: {normal_score_nsd}")
-print(f"RBF kernel classification test score SD: {normal_score_sd}")
-'''
-# %%
 #evaluate kernel
 time_quntum=datetime.now()
 qkernel_train=adhoc_kernel.evaluate(X_train_scaled)
 print('tempo esecuzione quantum train:', datetime.now()-time_quntum)
 qkernel_test=adhoc_kernel.evaluate(X_test_scaled,X_train_scaled)
-#substitute
+
+############set svm ##########
+#initialize
 adhoc_svc = SVC(kernel="precomputed",C=1)
 
-
-# %%
+#fit
 time_quntum=datetime.now()
 adhoc_svc.fit(qkernel_train, y_train)
 print('tempo esecuzione quantum:', datetime.now()-time_quntum)
 
-
-# %% [markdown]
+#############################################################################################################################
+#                             QUANTUM SVM EVALUATION                                                                        #
+#############################################################################################################################
 # adhoc_score_xlr = adhoc_svc.score(xlr_eval, y_xlr_eval)
 '''
 adhoc_score_nsd = adhoc_svc.score(nsd_eval, y_nsd_eval)
@@ -99,16 +86,14 @@ adhoc_score_sd = adhoc_svc.score(sd_eval, y_sd_eval)
 print(f"Callable kernel classification test score NSD: {adhoc_score_nsd}")
 print(f"Callable kernel classification test score SD: {adhoc_score_sd}")
 '''
-# %%
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
-
 y_test_pred=adhoc_svc.predict(qkernel_test)
 print ('accuracy score: %0.3f' % accuracy_score(y_test, y_test_pred))
 C=confusion_matrix(y_true=y_test,y_pred=y_test_pred)
 print(C)
 
-# %%
+#############################################################################################################################
+#                                           VARIOUS PLOTS                                                                   #
+#############################################################################################################################
 '''
 kernel = adhoc_kernel.evaluate(x_vec = X_train_scaled)
 
@@ -157,6 +142,28 @@ ax.legend()
 plt.savefig('./surf_decision.png')
 
 
+'''
+#############################################################################################################################
+#                              CLASSICAL SVM PIPELINE                                                                       #
+#############################################################################################################################
+
+
+'''
+#
+normal_svc = SVC(kernel = "rbf", C= 20)
+time_classic=datetime.now()
+normal_svc.fit(X_train_scaled, y_train)
+print('tempo esecuzione:', datetime.now()-time_classic)
+xlr_eval, _, y_xlr_eval, _ = train_test_split(X_test_scaled, y_test, train_size= 500, random_state=89,stratify=y_test)
+nsd_eval, _, y_nsd_eval, _ = train_test_split(nsd_scaled, y_nsd, train_size= 500, random_state=89,stratify=y_nsd)
+sd_eval, _, y_sd_eval, _ = train_test_split(sd_scaled, y_sd, train_size= 500, random_state=89,stratify=y_sd)
 
 # %%
+normal_score_xlr = normal_svc.score(xlr_eval, y_xlr_eval)
+normal_score_nsd = normal_svc.score(nsd_eval, y_nsd_eval)
+normal_score_sd = normal_svc.score(sd_eval, y_sd_eval)
+print(f"RBF kernel classification test score XLR: {normal_score_xlr}")
+print(f"RBF kernel classification test score NSD: {normal_score_nsd}")
+print(f"RBF kernel classification test score SD: {normal_score_sd}")
 '''
+# %%
