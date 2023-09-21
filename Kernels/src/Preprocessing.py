@@ -27,7 +27,7 @@ def Sample(data_input,features,labels,samp_size,):
 
 def Split_and_sample(df_tot_sel,features,labels,
                      tr_sz=0.6,ts_sz=0.4,
-                     tr_size=70,ts_size=70):
+                     min_sz=70):
     """
     Take dataframe split in test and train and sample balancing classes,returns X_train/test and y_train/test
 
@@ -45,7 +45,7 @@ def Split_and_sample(df_tot_sel,features,labels,
         g_tr = X_train.groupby('Class')
         print("Train class dist:")
         print(g_tr.size())
-        samp_size_tr=min(tr_size,g_tr.size().min())
+        samp_size_tr=min(min_sz,g_tr.size().min())
         X_train= pd.DataFrame(g_tr.apply(lambda x: x.sample(samp_size_tr,random_state=89)))
         print(type(X_train))
         y_train=X_train['Class'].droplevel(level='Class')
@@ -56,7 +56,7 @@ def Split_and_sample(df_tot_sel,features,labels,
         g_ts = X_test.groupby('Class')
         print("Test class dist:")
         print(g_ts.size())
-        samp_size_ts=min(ts_size,g_ts.size().min())
+        samp_size_ts=min(min_sz,g_ts.size().min())
         #X_test= pd.DataFrame(g_ts.apply(lambda x: x.sample(ts_size,random_state=89)))
         X_test= pd.DataFrame(g_ts.apply(lambda x: x.sample(samp_size_ts,random_state=89)))
         y_test=X_test['Class'].droplevel(level='Class')
