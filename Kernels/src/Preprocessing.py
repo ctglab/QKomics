@@ -61,10 +61,10 @@ def Split_and_sample(df_tot_sel,features,labels,
         X_test= pd.DataFrame(g_ts.apply(lambda x: x.sample(samp_size_ts,random_state=89)))
         y_test=X_test['Class'].droplevel(level='Class')
         X_test=X_test[features].droplevel(level='Class')
-        
-        #Transform in numpy obj
-        y_train= y_train.to_numpy()
-        y_test= y_test.to_numpy()
+
+    #Transform in numpy obj
+    y_train= y_train.to_numpy()
+    y_test= y_test.to_numpy()
 
     return X_train,y_train,X_test,y_test
 
