@@ -27,7 +27,7 @@ def Sample(data_input,features,labels,samp_size,):
 
 def Split_and_sample(df_tot_sel,features,labels,
                      tr_sz=0.6,ts_sz=0.4,
-                     min_sz=70):
+                     min_sz=70,balanced=True):
     """
     Take dataframe split in test and train and sample balancing classes,returns X_train/test and y_train/test
 
@@ -35,7 +35,7 @@ def Split_and_sample(df_tot_sel,features,labels,
     #Extract data and Split train and test
     X_train, X_test, y_train, y_test = train_test_split(df_tot_sel[features],df_tot_sel[labels],
                                                         train_size=tr_sz,test_size=ts_sz,
-                                                        random_state=89,stratify=df_tot_sel[labels],balanced=True)
+                                                        random_state=89,stratify=df_tot_sel[labels])
             
 
     print(X_train.shape)

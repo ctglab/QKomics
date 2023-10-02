@@ -34,11 +34,14 @@ def Save_kernel(qkernel,dir,tag):
     dir=string with directory to save qkernel as pickle
     tag=string with kernel specific tag
     """
-    with open(dir+'qk_tot_{}.pickle'.format(round(tag,2)),'wb') as f:
+    with open(dir+'qk_tot_{}.pickle'.format(tag),'wb') as f:
                         pickle.dump(qkernel, f)
+    return 0
 
 def Compute_and_save_kernel(X_train,X_test,adhoc_kernel,dir,tag):
         """
         """
         qkernel=Compute_kernel(X_train,X_test,adhoc_kernel)
         Save_kernel(qkernel,dir,tag)
+        
+        return 0

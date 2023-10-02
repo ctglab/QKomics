@@ -1,6 +1,8 @@
 #Load libraries
 import numpy as np
 import pandas as pd
+import math
+import threading
 from datetime import datetime
 import os
 import json
@@ -17,13 +19,44 @@ from Kernels.src.kernels_quantum import Compute_kernel,Compute_and_save_kernel
 from  Kernels.src.Preprocessing import Split_and_sample
 
 
-
+num_thr=3
 ### Function for paralellizing  ###
-def Dummy_QKernel(X_train,X_test,adhoc_kernel,dir,b):
-        scaler = MinMaxScaler(feature_range = (0,b*np.pi))
-        scaler.fit(X_train)
-        X_train_scaled = scaler.transform(X_train)
-        Compute_and_save_kernel(X_train,X_test,adhoc_kernel,dir,tag='tr_{}'.format(b))
+def Dummy_QKernel(items,iteration,data_dict,output_dir):
+        for i in items:
+            item=iteration[i]
+            #Get params from iteration 
+
+            ft=item[0]
+            ent=item[1]
+            case_=item [2]
+            b=item[3]
+            # Build ft_map
+            #Build ft map
+            feature_map=ft_maps_dict.get(ft)
+            feature_map.entanglement=ent
+            adhoc_kernel = QuantumKernel(feature_map=feature_map, quantum_instance=adhoc_backend)
+            #Get data 
+            X_train=data_dict[case_]['X_train']
+            X_test=data_dict[case_]['X_test']
+            y_train=data_dict[case_]['y_train']
+            y_test=data_dict[case_]['y_test']
+            # Generate directory for kernel results
+
+            kernel_dir_b= output_dir+case_+'/'+ft+'_'+ent+'/'
+            try:
+                os.makedirs(kernel_dir_b)
+            except OSError:
+                print ("Creation of the directory %s failed. Directory already exist" % kernel_dir_b)
+            else:
+                print ("Successfully created the directory %s " % kernel_dir_b)
+            
+            #scale data
+            scaler = MinMaxScaler(feature_range = (0,b*np.pi))
+            scaler.fit(X_train)
+            X_test_scaled = scaler.transform(X_test)
+            X_train_scaled = scaler.transform(X_train)
+            #Compute
+            Compute_and_save_kernel(X_train,X_train,adhoc_kernel,kernel_dir_b,tag='tr_paral_{}'.format(b))
         return 0
 
 def split(list_a, chunk_size):
@@ -126,7 +159,7 @@ ft_maps_dict={'ZZ': feature_map_ZZ,
 
 #Get scaling parameters
 bandwidth=params['Scaling']['bandwidth']
-
+time_start=datetime.now()
 #Loop over cases,ft maps, and scaling
 for key in maps.keys():
     #get ft maps params
@@ -137,17 +170,13 @@ for key in maps.keys():
     feature_map=ft_maps_dict.get(ft)
     feature_map.entanglement=ent
     adhoc_kernel = QuantumKernel(feature_map=feature_map, quantum_instance=adhoc_backend)
-
     print('#############{}_{}################'.format(ft,ent),flush=True)
-    
-    
     for case_ in data_dict.keys():
         print('----------CASE {}-------'.format(case_),flush=True)
         X_train=data_dict[case_]['X_train']
         X_test=data_dict[case_]['X_test']
         y_train=data_dict[case_]['y_train']
         y_test=data_dict[case_]['y_test']
-        
         # Generate directory for kernel results
         kernel_dir_b= output_dir+'/'+case_+'/'+ft+'_'+ent+'/'
 
@@ -177,8 +206,9 @@ for key in maps.keys():
             #Compute Test kernel
             qkernel_test=Compute_and_save_kernel(X_train=X_train_scaled,X_test=X_test_scaled,
                                                   adhoc_kernel=adhoc_kernel,dir=kernel_dir_b,tag='ts_{}'.format(b))
-            
-            
+
+time_tot=datetime.now()-time_start           
+print('Time total {} :'.format(time_tot))
 
 
         
@@ -186,7 +216,19 @@ for key in maps.keys():
 results_list = []
 results_eigen = []
 #iterable items
-inputs=np.arange(0,len(filter),1).astype('int')
+iteration=[]
+for key in maps.keys():
+    #get ft maps params
+    ft=maps[key]['ft_map']
+    ent=maps[key]['ent_type']
+
+    for case_ in data_dict.keys():
+        for b in bandwidth:
+            iteration.append((ft,ent,case_,b))
+    
+
+
+inputs=np.arange(0,len(iteration),1).astype('int')
 
 if num_thr > len(inputs):
     target_thrds = len(inputs)
@@ -196,15 +238,15 @@ print(target_thrds)
 #set and pair thread chunks and target                            
 thread_chunk_size = math.floor(len(inputs)/ target_thrds)
 target_lists = split(inputs, thread_chunk_size)
-                        
+
 threads = []
 thr = 1
 time=datetime.now()
 flag=0
-print('Computing Contribution entropy, the process migth take several hours :|')
+#print('Computing Contribution entropy, the process migth take several hours :|')
 for item in target_lists:
-    threads.append(threading.Thread(target=Dummy_Entropy, 
-                   args= (ent_type,item, data, filter, H_r,results_list,results_eigen)) )
+    threads.append(threading.Thread(target=Dummy_QKernel, 
+                   args= (item,iteration,data_dict,output_dir)) )
     thr = thr+1
     flag+=1                    
 for t in threads:
@@ -212,8 +254,7 @@ for t in threads:
                         
 for t in threads:
     t.join()
-print(datetime.now()-time)
-    
+print('Time total with multiprocessing : {}'.format(datetime.now()-time))
     
 
 
