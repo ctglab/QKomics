@@ -1,20 +1,21 @@
 {
     "Data":{
-        "Sampling_size":500,
+        "Sampling_size":1980,
         "task":{
             "Supervised":{
                 "classes":{
-                    "4_classes":[4,5,8,10],
-                    "10_classes":[1,2,3,4,5,6,7,8,9,10]
+                    "10_classes":[1,2,3,4,5,6,7,8,9,10],
+                    "4_classes":[4,5,8,10]
+                    
                 },
                 "tr_sz":0.6,
                 "ts_sz":0.4,
                 "balanced":"True",
-                "min_sz":70
+                "min_sz":500
             }
         },
         "Input_file":"./Input_data/PCA_METABRIC_10cmp_IC10_full.csv",
-        "Output_dir":"./Kernels_Results/"
+        "Output_dir":"./Kernels_Results/Supervised_1980/"
 
     },
 
@@ -47,6 +48,7 @@
     },
     "Scaling":{
         "bandwidth":[0.125,0.25,0.5,1,2]
-    }
+    },
+    "num_thr":2
 
 }

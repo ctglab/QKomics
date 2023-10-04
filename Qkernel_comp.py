@@ -110,6 +110,8 @@ if task=='Supervised':
         data_dict[case]['X_test']=X_test
         data_dict[case]['y_train']=y_train
         data_dict[case]['y_test']=y_test
+        print('{} train = {} samples '.format(case,y_train.shape))
+        print('{} test = {} samples '.format(case,y_test.shape))
 
 #############COMPUTE QUANTUM KERNELS###################
 
@@ -126,7 +128,7 @@ ft_maps_dict={'ZZ': feature_map_ZZ,
 
 #Get scaling parameters
 bandwidth=params['Scaling']['bandwidth']
-
+time_start=datetime.now()
 #Loop over cases,ft maps, and scaling
 for key in maps.keys():
     #get ft maps params
@@ -178,43 +180,10 @@ for key in maps.keys():
             qkernel_test=Compute_and_save_kernel(X_train=X_train_scaled,X_test=X_test_scaled,
                                                   adhoc_kernel=adhoc_kernel,dir=kernel_dir_b,tag='ts_{}'.format(b))
             
-            
+time_tot=datetime.now()-time_start           
+print('Time total {} :'.format(time_tot))
 
-
-        
-### MULTI THREADING #########################################################################
-results_list = []
-results_eigen = []
-#iterable items
-inputs=np.arange(0,len(filter),1).astype('int')
-
-if num_thr > len(inputs):
-    target_thrds = len(inputs)
-else:
-    target_thrds = num_thr
-print(target_thrds)
-#set and pair thread chunks and target                            
-thread_chunk_size = math.floor(len(inputs)/ target_thrds)
-target_lists = split(inputs, thread_chunk_size)
-                        
-threads = []
-thr = 1
-time=datetime.now()
-flag=0
-print('Computing Contribution entropy, the process migth take several hours :|')
-for item in target_lists:
-    threads.append(threading.Thread(target=Dummy_Entropy, 
-                   args= (ent_type,item, data, filter, H_r,results_list,results_eigen)) )
-    thr = thr+1
-    flag+=1                    
-for t in threads:
-    t.start()
-                        
-for t in threads:
-    t.join()
-print(datetime.now()-time)
-    
-    
+  
 
 
 

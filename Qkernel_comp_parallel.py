@@ -19,17 +19,17 @@ from Kernels.src.kernels_quantum import Compute_kernel,Compute_and_save_kernel
 from  Kernels.src.Preprocessing import Split_and_sample
 
 
-num_thr=3
+
 ### Function for paralellizing  ###
 def Dummy_QKernel(items,iteration,data_dict,output_dir):
         for i in items:
-            item=iteration[i]
+            params=iteration[i]
             #Get params from iteration 
 
-            ft=item[0]
-            ent=item[1]
-            case_=item [2]
-            b=item[3]
+            ft=params[0]
+            ent=params[1]
+            case_=params [2]
+            b=params[3]
             # Build ft_map
             #Build ft map
             feature_map=ft_maps_dict.get(ft)
@@ -55,8 +55,12 @@ def Dummy_QKernel(items,iteration,data_dict,output_dir):
             scaler.fit(X_train)
             X_test_scaled = scaler.transform(X_test)
             X_train_scaled = scaler.transform(X_train)
+            print('#############{}_{}################'.format(ft,ent),flush=True)
             #Compute
             Compute_and_save_kernel(X_train,X_train,adhoc_kernel,kernel_dir_b,tag='tr_paral_{}'.format(b))
+            time_k=datetime.now()-time_start
+            print('Time employed for training and bandwidth {} :'.format(time_k))
+            Compute_and_save_kernel(X_train,X_train,adhoc_kernel,kernel_dir_b,tag='ts_paral_{}'.format(b))
         return 0
 
 def split(list_a, chunk_size):
@@ -160,7 +164,9 @@ ft_maps_dict={'ZZ': feature_map_ZZ,
 #Get scaling parameters
 bandwidth=params['Scaling']['bandwidth']
 time_start=datetime.now()
+print(time_start)
 #Loop over cases,ft maps, and scaling
+"""
 for key in maps.keys():
     #get ft maps params
     ft=maps[key]['ft_map']
@@ -206,13 +212,16 @@ for key in maps.keys():
             #Compute Test kernel
             qkernel_test=Compute_and_save_kernel(X_train=X_train_scaled,X_test=X_test_scaled,
                                                   adhoc_kernel=adhoc_kernel,dir=kernel_dir_b,tag='ts_{}'.format(b))
-
-time_tot=datetime.now()-time_start           
+            print('Time employed for test and bandwidth {} :'.format(datetime.now()-time_k))
+time_tot=datetime.now()-time_start    
+print(datetime.now())       
 print('Time total {} :'.format(time_tot))
+"""
 
 
         
 ### MULTI THREADING #########################################################################
+num_thr=params['num_thr']
 results_list = []
 results_eigen = []
 #iterable items
