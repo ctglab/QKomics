@@ -1,6 +1,8 @@
 import numpy as np
 import glob
 import pandas as pd
+import argparse
+import json
 import os
 import pickle
 import matplotlib.pyplot as plt
@@ -11,8 +13,9 @@ from sklearn.cluster import SpectralClustering
 from sklearn.metrics import silhouette_score
 
 from Kernels.src.kernels_classic import Compute_rbf_kernel
+from Kernels.src.Preprocessing import Load_kernels
 from Kernels.src.Analysis.Clustering import *
-from Kernels.src.Analysis.kernel import *
+from Kernels.src.Analysis.Kernel import *
 
 #QuAsk
 from quask.metrics import calculate_geometric_difference, calculate_generalization_accuracy,calculate_model_complexity ,calculate_kernel_target_alignment
@@ -82,7 +85,7 @@ print(n_samples)
 #                              GET PERFORMANCES                                                                             #
 #############################################################################################################################
 bwidth=params["Scaling"]["bandwidth"]
-K=params["Scaling"]["K"]
+K=params["Clustering"]["K"]
 # create an Empty DataFrame
 # object With column names only
 df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','v_intra','v_inter','N_samples'])
@@ -132,13 +135,13 @@ for b in bwidth:
 df_new_clust=pd.DataFrame()
 
 ##TO JSON
-dir=params["Kernel"][]
+dir=params["Kernel"]["K_dir"]
 
 #CLUSTERING
 for i in glob.glob(dir):
     print(i)
     ft_map=i.split('/')[-1]
-    for k_dir in sorted(glob.glob(i)):
+    for k_dir in sorted(glob.glob(i+'/*')):
         print(k_dir)
     
         q_k_tr=Load_kernels(k_dir=k_dir)
@@ -205,7 +208,7 @@ print('##############CHECK##############')
 print(df_perf[(df_perf.ftmap.isin(['ZZ_linear','Z_linear'])) & (df_perf.Bandwidth==6.28) & (df_perf.K==4)].concentration)
 ##SAVE DF##
 df_perf.to_csv(res_dir+'clustering_{}_opt_k_reviewed.csv'.format(n_samples))
-
+tt
 #############################################################################################################################
 #                                                   PLOT                                                                    #
 #############################################################################################################################

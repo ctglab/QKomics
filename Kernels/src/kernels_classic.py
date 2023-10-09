@@ -13,4 +13,4 @@ def Compute_rbf_kernel(X_train,X_test):
     n_ft=X_train.to_numpy().shape[1]
     gamma=1 / (n_ft * X_train.to_numpy().var())
     K_classic_tr = rbf_kernel(X_train,X_test, gamma = gamma)
-    return(X_train)
+    return(K_classic_tr)
