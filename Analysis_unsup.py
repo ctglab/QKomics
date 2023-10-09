@@ -160,7 +160,7 @@ for i in glob.glob(dir):
             np.fill_diagonal(q_k_dist,0)
             sil_q=silhouette_score(q_k_dist,metric='precomputed',labels=cluster_labels,random_state=42)
             print(sil_q)
-            #TO JSON
+            
             Silhouette_plot(q_k_tr,K,scale=True,out_dir=res_dir,tag='Cluster_'+ft_map+'_'+b+'')
             
             #Score on original data
