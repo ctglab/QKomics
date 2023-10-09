@@ -1,0 +1,53 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############ZZ_full################
+Successfully created the directory ./Kernels_Results/Unsupervised_1000//ZZ_full/ 
+./Kernels_Results/Unsupervised_1000//ZZ_full/
+0.125
+(1000, 4)
+Time employed for  bandwidth 1:45:16.955342 :
+0.25
+(1000, 4)
+Time employed for  bandwidth 1:52:23.360085 :
+0.5
+(1000, 4)
+Time employed for  bandwidth 1:56:45.747128 :
+1
+(1000, 4)
+Time employed for  bandwidth 1:49:54.560872 :
+2
+(1000, 4)
+Time employed for  bandwidth 1:49:26.056879 :
+#############ZZ_linear################
+Successfully created the directory ./Kernels_Results/Unsupervised_1000//ZZ_linear/ 
+./Kernels_Results/Unsupervised_1000//ZZ_linear/
+0.125
+(1000, 4)
+Time employed for  bandwidth 1:34:23.218106 :
+0.25
+(1000, 4)
+Time employed for  bandwidth 1:35:06.580870 :
+0.5
+(1000, 4)
+Time employed for  bandwidth 1:35:39.267449 :
+1
+(1000, 4)
+Time employed for  bandwidth 1:37:42.465870 :
+2
+(1000, 4)
+Time employed for  bandwidth 1:38:00.992401 :
+#############Z_full################
+Successfully created the directory ./Kernels_Results/Unsupervised_1000//Z_full/ 
+./Kernels_Results/Unsupervised_1000//Z_full/
+0.125
+(1000, 4)
+Time employed for  bandwidth 1:52:27.081203 :
+0.25
+(1000, 4)
+Time employed for  bandwidth 1:53:47.926601 :
+0.5
+(1000, 4)
+Time employed for  bandwidth 1:52:59.478044 :
+1
+(1000, 4)

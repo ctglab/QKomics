@@ -1,0 +1,22 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############ZZ_linear################
+Successfully created the directory ./Kernels_Results/Unsupervised_1000_3q//ZZ_linear/ 
+./Kernels_Results/Unsupervised_1000_3q//ZZ_linear/
+0.125
+(1000, 6)
+Time employed for  bandwidth 2:14:58.260675 :
+0.25
+(1000, 6)
+Time employed for  bandwidth 2:21:16.602883 :
+0.5
+(1000, 6)
+Time employed for  bandwidth 2:21:21.187820 :
+1
+(1000, 6)
+Time employed for  bandwidth 2:23:05.574768 :
+2
+(1000, 6)
+Time employed for  bandwidth 2:21:37.047069 :
+Time total 11:42:19.732724 :

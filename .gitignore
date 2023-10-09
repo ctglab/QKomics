@@ -1,4 +1,4 @@
-*.pickle
+
 .pycache/
 */__pycache_
 *slurm*

@@ -57,10 +57,10 @@ def Dummy_QKernel(items,iteration,data_dict,output_dir):
             X_train_scaled = scaler.transform(X_train)
             print('#############{}_{}################'.format(ft,ent),flush=True)
             #Compute
-            Compute_and_save_kernel(X_train,X_train,adhoc_kernel,kernel_dir_b,tag='tr_paral_{}'.format(b))
+            Compute_and_save_kernel(X_train_scaled,X_train_scaled,adhoc_kernel,kernel_dir_b,tag='tr_paral_{}'.format(b))
             time_k=datetime.now()-time_start
             print('Time employed for training and bandwidth {} :'.format(time_k))
-            Compute_and_save_kernel(X_train,X_train,adhoc_kernel,kernel_dir_b,tag='ts_paral_{}'.format(b))
+            Compute_and_save_kernel(X_train_scaled,X_test_scaled,adhoc_kernel,kernel_dir_b,tag='ts_paral_{}'.format(b))
         return 0
 
 def split(list_a, chunk_size):
@@ -166,7 +166,7 @@ bandwidth=params['Scaling']['bandwidth']
 time_start=datetime.now()
 print(time_start)
 #Loop over cases,ft maps, and scaling
-"""
+
 for key in maps.keys():
     #get ft maps params
     ft=maps[key]['ft_map']
@@ -202,11 +202,11 @@ for key in maps.keys():
             X_test_scaled = scaler.transform(X_test)
             print(X_train_scaled.shape)
             #Compute kernel
-            time_start=datetime.now()
+            time_k=datetime.now()
             #Compute Training kernel
             qkernel_train=Compute_and_save_kernel(X_train=X_train_scaled,X_test=X_train_scaled,
                                                   adhoc_kernel=adhoc_kernel,dir=kernel_dir_b,tag='tr_{}'.format(b))
-            time_k=datetime.now()-time_start
+            time_k=datetime.now()-time_k
             print('Time employed for training and bandwidth {} :'.format(time_k))
             
             #Compute Test kernel
@@ -216,7 +216,7 @@ for key in maps.keys():
 time_tot=datetime.now()-time_start    
 print(datetime.now())       
 print('Time total {} :'.format(time_tot))
-"""
+
 
 
         

@@ -1,0 +1,32 @@
+{
+    "Data":{
+        "Sampling_size":1000,
+        "task":"Unsupervised",
+        "Input_file":"./Input_data/PCA_METABRIC_10cmp_IC10_full.csv",
+        "Output_dir":"./Kernels_Results/Unsupervised_1000_3q/"
+
+    },
+
+    "ft_maps":{
+        "maps":{
+            "Z":{
+                "ft_map":"Z",
+                "ent_type":"full"
+            }
+        }, 
+        "n_reps":1
+
+    },
+
+    "Backend":{
+        "shots":2000,
+        "n_qubits":6,
+        "backend":"qasm_simulator",
+        "seed":12345
+
+    },
+    "Scaling":{
+        "bandwidth":[0.125,0.25,0.5,1,2]
+    }
+
+}

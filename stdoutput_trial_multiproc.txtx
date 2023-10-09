@@ -1,0 +1,189 @@
+(36, 4)
+Train class dist:
+Class
+4     10
+5      2
+8     11
+10    13
+dtype: int64
+<class 'pandas.core.frame.DataFrame'>
+Test class dist:
+Class
+4     6
+5     2
+8     8
+10    9
+dtype: int64
+(60, 4)
+Train class dist:
+Class
+1      4
+2      3
+3      8
+4     10
+5      2
+6      2
+7      4
+8     12
+9      2
+10    13
+dtype: int64
+<class 'pandas.core.frame.DataFrame'>
+Test class dist:
+Class
+1     2
+2     2
+3     5
+4     6
+5     2
+6     2
+7     3
+8     7
+9     2
+10    9
+dtype: int64
+#############ZZ_full################
+----------CASE 4_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/4_classes/ZZ_full/ 
+./Kernels_Results/Supervised_trial/4_classes/ZZ_full/
+0.125
+(8, 4)
+Time employed for training and bandwidth 0:00:01.147341 :
+0.25
+(8, 4)
+Time employed for training and bandwidth 0:00:00.755021 :
+0.5
+(8, 4)
+Time employed for training and bandwidth 0:00:00.652985 :
+1
+(8, 4)
+Time employed for training and bandwidth 0:00:00.638652 :
+2
+(8, 4)
+Time employed for training and bandwidth 0:00:00.636617 :
+----------CASE 10_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/10_classes/ZZ_full/ 
+./Kernels_Results/Supervised_trial/10_classes/ZZ_full/
+0.125
+(20, 4)
+Time employed for training and bandwidth 0:00:02.421507 :
+0.25
+(20, 4)
+Time employed for training and bandwidth 0:00:02.482781 :
+0.5
+(20, 4)
+Time employed for training and bandwidth 0:00:02.483802 :
+1
+(20, 4)
+Time employed for training and bandwidth 0:00:02.481228 :
+2
+(20, 4)
+Time employed for training and bandwidth 0:00:02.498929 :
+#############ZZ_linear################
+----------CASE 4_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/4_classes/ZZ_linear/ 
+./Kernels_Results/Supervised_trial/4_classes/ZZ_linear/
+0.125
+(8, 4)
+Time employed for training and bandwidth 0:00:00.627155 :
+0.25
+(8, 4)
+Time employed for training and bandwidth 0:00:00.644933 :
+0.5
+(8, 4)
+Time employed for training and bandwidth 0:00:02.611088 :
+1
+(8, 4)
+Time employed for training and bandwidth 0:00:00.617791 :
+2
+(8, 4)
+Time employed for training and bandwidth 0:00:00.607448 :
+----------CASE 10_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/10_classes/ZZ_linear/ 
+./Kernels_Results/Supervised_trial/10_classes/ZZ_linear/
+0.125
+(20, 4)
+Time employed for training and bandwidth 0:00:02.228965 :
+0.25
+(20, 4)
+Time employed for training and bandwidth 0:00:02.243094 :
+0.5
+(20, 4)
+Time employed for training and bandwidth 0:00:02.288772 :
+1
+(20, 4)
+Time employed for training and bandwidth 0:00:02.187728 :
+2
+(20, 4)
+Time employed for training and bandwidth 0:00:02.271375 :
+#############Z_full################
+----------CASE 4_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/4_classes/Z_full/ 
+./Kernels_Results/Supervised_trial/4_classes/Z_full/
+0.125
+(8, 4)
+Time employed for training and bandwidth 0:00:00.750044 :
+0.25
+(8, 4)
+Time employed for training and bandwidth 0:00:00.655067 :
+0.5
+(8, 4)
+Time employed for training and bandwidth 0:00:00.645327 :
+1
+(8, 4)
+Time employed for training and bandwidth 0:00:00.651774 :
+2
+(8, 4)
+Time employed for training and bandwidth 0:00:00.685431 :
+----------CASE 10_classes-------
+Successfully created the directory ./Kernels_Results/Supervised_trial/10_classes/Z_full/ 
+./Kernels_Results/Supervised_trial/10_classes/Z_full/
+0.125
+(20, 4)
+Time employed for training and bandwidth 0:00:02.513834 :
+0.25
+(20, 4)
+Time employed for training and bandwidth 0:00:02.502297 :
+0.5
+(20, 4)
+Time employed for training and bandwidth 0:00:02.546782 :
+1
+(20, 4)
+Time employed for training and bandwidth 0:00:02.476084 :
+2
+(20, 4)
+Time employed for training and bandwidth 0:00:02.398959 :
+Time total 0:00:07.187365 :
+3
+Successfully created the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_full/ 
+Successfully created the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_linear/ 
+Successfully created the directory ./Kernels_Results/Supervised_trial4_classes/Z_full/ 
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial4_classes/ZZ_linear/ failed. Directory already exist
+Successfully created the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ 
+Successfully created the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_full/ 
+Successfully created the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_linear/ 
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_linear/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/Z_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_full/ failed. Directory already exist
+Creation of the directory ./Kernels_Results/Supervised_trial10_classes/ZZ_full/ failed. Directory already exist
+Time total with multiprocessing : 0:00:55.433080
