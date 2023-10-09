@@ -8,11 +8,6 @@ from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.preprocessing import MinMaxScaler
 
 
-
-
-
-
-
 def Sample(data_input,features,labels,samp_size,):
     """
     Split 
@@ -68,3 +63,8 @@ def Split_and_sample(df_tot_sel,features,labels,
 
     return X_train,y_train,X_test,y_test
 
+def Load_kernels(k_dir):
+    with open(k_dir,'rb') as f:
+         qk=pickle.load(f,encoding = "bytes")
+         f.close()
+    return qk
