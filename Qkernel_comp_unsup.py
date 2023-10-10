@@ -94,7 +94,7 @@ maps=params['ft_maps']['maps']
 feature_map_ZZ = ZZFeatureMap(feature_dimension=len(features), reps=n_reps)
 feature_map_Z = ZFeatureMap(feature_dimension=len(features), reps=n_reps)
 ft_maps_dict={'ZZ': feature_map_ZZ,
-              'Z':feature_map_ZZ
+              'Z':feature_map_Z
               }
 
 #Get scaling parameters
