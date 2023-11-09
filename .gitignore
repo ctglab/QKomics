@@ -1,5 +1,8 @@
-
+*/*_prova
 .pycache/
-*/__pycache_
+/Kernels/src/__pycache__
+/Kernels/src/Analysis/__pycache__
 *slurm*
+*.png
+./Kernels_Results/Unsupervised_prova/
 

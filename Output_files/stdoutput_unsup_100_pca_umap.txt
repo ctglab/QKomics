@@ -1,0 +1,8 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############ZZ_full################
+Successfully created the directory ./Kernels_Results/Unsupervised_100_umap_8000//ZZ_full/ 
+./Kernels_Results/Unsupervised_100_umap_8000//ZZ_full/
+0.125
+(100, 4)

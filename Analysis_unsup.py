@@ -61,11 +61,17 @@ samp_size=params['Data']["Sampling_size"]
 
 #SELECT FT
 features=[]
-for i in range(1,int(n_qubits/2)+1):
-    name_cna='Component_'+str(i)+'_cna'
-    name_exp='Component_'+str(i)+'_exp'
-    features.append(name_cna)
-    features.append(name_exp)
+if params['Data']["encoding"]=='separated':
+    for i in range(1,int(n_qubits/2) +1):
+        name_cna='Component_'+str(i)+'_cna'
+        name_exp='Component_'+str(i)+'_exp'
+        features.append(name_cna)
+        features.append(name_exp)
+else:
+    for i in range(1,int(n_qubits) +1):
+        name_='Component_'+str(i)
+        features.append(name_)
+
 labels = 'IntClustMemb'
 print(features)
 
