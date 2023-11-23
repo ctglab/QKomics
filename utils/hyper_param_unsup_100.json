@@ -1,10 +1,10 @@
 {
     "Data":{
-        "Sampling_size":1000,
+        "Sampling_size":100,
         "task":"Unsupervised",
         "encoding":"togheter",
-        "Input_file":"./Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
-        "Output_dir":"./Kernels_Results/Unsupervised_1000_umap/"
+        "Input_file":"./Input_data/UMAP_OPT_METABRIC_4cmp_IC10_full.csv",
+        "Output_dir":"./Kernels_Results/Unsupervised_100_umap_opt/"
 
     },
 

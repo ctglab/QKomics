@@ -1,6 +1,6 @@
 {
     "Data":{
-        "Sampling_size":1980,
+        "Sampling_size":1000,
         "task":{
             "Supervised":{
                 "classes":{
@@ -15,12 +15,12 @@
             }
         },
         "Input_file":"./Input_data/PCA_METABRIC_10cmp_IC10_full.csv",
-        "Output_dir":"Results/Supervised_1980/"
+        "Output_dir":"Results/Supervised_1000_opt/"
     },
 
     "Kernel":{
         "n_qubits":6,
-        "K_dir":"Kernels_Results/Supervised_1980"
+        "K_dir":"Kernels_Results/Supervised_1000"
     },
 
     "ft_maps":{
