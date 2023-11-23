@@ -10,7 +10,7 @@ import seaborn as sns
 
 from statistics import mean,variance
 from sklearn.cluster import SpectralClustering
-from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_score , calinski_harabasz_score
 
 from Kernels.src.kernels_classic import Compute_rbf_kernel
 from Kernels.src.Preprocessing import Load_kernels
@@ -94,7 +94,7 @@ bwidth=params["Scaling"]["bandwidth"]
 K=params["Clustering"]["K"]
 # create an Empty DataFrame
 # object With column names only
-df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','v_intra','v_inter','N_samples'])
+df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','CHI','v_intra','v_inter','N_samples'])
 df_sil= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','silhouette','N_samples']) 
 print(df_perf)
 
@@ -120,6 +120,8 @@ for b in bwidth:
         #CLUSTER EVALUTION:
         #silhouette score
         sil_rbf_4=silhouette_score(1-K_classic_tr,metric='precomputed',labels=cluster_labels,random_state=42)
+        #CHI
+        chi=calinski_harabasz_score(X_train,cluster_labels)
 
         df_perf.loc[len(df_perf)]={'ftmap' : 'rbf', 
                             'K' : k, 
@@ -127,6 +129,7 @@ for b in bwidth:
                             's':sc,
                             'concentration':conc_ck,
                             'silhouette': sil_rbf_4,
+                            'CHI':chi,
                             'Score_cluster':score_rbf_4 ,
                             'v_intra':v_intra_rbf4,
                             'v_inter':v_inter_rbf4,
@@ -176,6 +179,8 @@ for i in glob.glob(dir):
             #cluster_score = normalized_mutual_info_score(cluster_labels, y_train)
             #Cluster score
             score_q,v_intra_q,v_inter_q=Cluster_score(q_k_dist,cluster_labels)
+            #CHI
+            chi=calinski_harabasz_score(X_train,cluster_labels)
             
 
             # #plot new cluster
@@ -201,6 +206,7 @@ for i in glob.glob(dir):
                                     's':sq,
                                     'concentration':qk_conc,
                                     'silhouette':sil_q,
+                                    'CHI':chi,
                                     'Score_cluster':score_q ,
                                     'v_intra':v_intra_q,
                                     'v_inter':v_inter_q,
