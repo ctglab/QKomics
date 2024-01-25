@@ -1,24 +1,23 @@
+#Run with conda env qiskit
 import numpy as np
 import glob
 import pandas as pd
 import argparse
 import json
 import os
-import pickle
+import pickle  as pkl
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from statistics import mean,variance
 from sklearn.cluster import SpectralClustering
 from sklearn.metrics import silhouette_score , calinski_harabasz_score
 
 from Kernels.src.kernels_classic import Compute_rbf_kernel
-from Kernels.src.Preprocessing import Load_kernels
 from Kernels.src.Analysis.Clustering import *
 from Kernels.src.Analysis.Kernel import *
 
 #QuAsk
-from quask.metrics import calculate_geometric_difference, calculate_generalization_accuracy,calculate_model_complexity ,calculate_kernel_target_alignment
+from quask.metrics import calculate_geometric_difference,calculate_model_complexity 
 
 
 ap=argparse.ArgumentParser()
@@ -94,7 +93,7 @@ bwidth=params["Scaling"]["bandwidth"]
 K=params["Clustering"]["K"]
 # create an Empty DataFrame
 # object With column names only
-df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','CHI','v_intra','v_inter','N_samples'])
+df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','CHI','DI','v_intra','v_inter','N_samples'])
 df_sil= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','silhouette','N_samples']) 
 print(df_perf)
 
@@ -122,6 +121,8 @@ for b in bwidth:
         sil_rbf_4=silhouette_score(1-K_classic_tr,metric='precomputed',labels=cluster_labels,random_state=42)
         #CHI
         chi=calinski_harabasz_score(X_train,cluster_labels)
+        #Dunn Index
+        di=Dunn_index(1-K_classic_tr,cluster_labels)
 
         df_perf.loc[len(df_perf)]={'ftmap' : 'rbf', 
                             'K' : k, 
@@ -130,6 +131,7 @@ for b in bwidth:
                             'concentration':conc_ck,
                             'silhouette': sil_rbf_4,
                             'CHI':chi,
+                            'DI':di,
                             'Score_cluster':score_rbf_4 ,
                             'v_intra':v_intra_rbf4,
                             'v_inter':v_inter_rbf4,
@@ -152,8 +154,10 @@ for i in glob.glob(dir):
     ft_map=i.split('/')[-1]
     for k_dir in sorted(glob.glob(i+'/*')):
         print(k_dir)
-    
-        q_k_tr=Load_kernels(k_dir=k_dir)
+        with open(k_dir,'rb') as f:
+         q_k_tr=pkl.load(f)
+         f.close()
+        
         
         #Compute concentration
         qk_conc=Kernel_concentration(q_k_tr)
@@ -173,7 +177,7 @@ for i in glob.glob(dir):
             sil_q=silhouette_score(q_k_dist,metric='precomputed',labels=cluster_labels,random_state=42)
             print(sil_q)
             
-            Silhouette_plot(q_k_tr,K,scale=True,out_dir=res_dir,tag='Cluster_'+ft_map+'_'+b+'')
+            #Silhouette_plot(q_k_tr,K,scale=True,out_dir=res_dir,tag='Cluster_'+ft_map+'_'+b+'')
             
             #Score on original data
             #cluster_score = normalized_mutual_info_score(cluster_labels, y_train)
@@ -181,7 +185,20 @@ for i in glob.glob(dir):
             score_q,v_intra_q,v_inter_q=Cluster_score(q_k_dist,cluster_labels)
             #CHI
             chi=calinski_harabasz_score(X_train,cluster_labels)
+            #Dunn Index
+            di=Dunn_index(q_k_dist,cluster_labels)
+            #Generate directory to save silhouette analysis
+            #generate Result dir 
+            try:
+                os.makedirs(res_dir+'/'+ft_map+'_'+b+'/')
+            except OSError:
+                print ("Creation of the directory %s failed. Directory already exist" % res_dir+'/'+ft_map+'_'+b+'/')
+            else:
+                print ("Successfully created the directory %s " % res_dir+'/'+ft_map+'_'+b+'/')
             
+            Silhouette_analysis(X=X_train.to_numpy(),X_distance=q_k_dist,cluster_labels=cluster_labels,
+                                n_clusters=k,out_dir=res_dir,
+                                tag='/'+ft_map+'_'+b+'/')
 
             # #plot new cluster
             # pc_df_4['Cluster_'+ft_map+'_'+b]=cluster_labels
@@ -207,6 +224,7 @@ for i in glob.glob(dir):
                                     'concentration':qk_conc,
                                     'silhouette':sil_q,
                                     'CHI':chi,
+                                    'DI':di,
                                     'Score_cluster':score_q ,
                                     'v_intra':v_intra_q,
                                     'v_inter':v_inter_q,

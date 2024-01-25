@@ -1,0 +1,21 @@
+{
+    "Data":{
+        "Sampling_size":1000,
+        "Input_file":"Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
+        "Output_dir":"Results/Unsupervised_1000_umap/",
+        "seed":42,
+        "encoding": "togheter"
+
+    },
+
+    "Kernel":{
+        "n_qubits":4,
+        "K_dir":"Kernels_Results/Unsupervised_1000_umap/*"
+    },
+    "Scaling":{
+        "bandwidth":[0.125,0.25,0.5,1,2]
+    },
+    "Clustering":{
+        "K":[2,3,4,5,6,7,8,9,10]
+    }
+}

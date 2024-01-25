@@ -64,6 +64,13 @@ def Cluster_score(dist_matrix,labels):
     #Score
     score=1-(m_intra/m_inter)
     return score, v_intra, v_inter
+def Dunn_index(dist_matrix,labels):
+    intra_cluster,inter_cluster=calculate_intra_inter_distances(dist_matrix,labels)
+    min_inter=min(inter_cluster)
+    max_intra=max(intra_cluster)
+    DI=min_inter/max_intra
+    return DI
+    
 
 def Calinski_Harabasz_Index(X,distance_matrix,labels):
     #Get number of clusters
@@ -131,7 +138,7 @@ def Silhouette_plot(X,K,scale=False,out_dir='./',tag=''):
     plt.close()
     return 0
 
-def Silhouette_analysis(X,cluster_labels,n_clusters,out_dir='./',tag=''):
+def Silhouette_analysis(X,X_distance,cluster_labels,n_clusters,out_dir='./',tag=''):
     # Create a subplot with 1 row and 2 columns
     fig, (ax1, ax2) = plt.subplots(1, 2)
     fig.set_size_inches(18, 7)
@@ -148,9 +155,9 @@ def Silhouette_analysis(X,cluster_labels,n_clusters,out_dir='./',tag=''):
     # This gives a perspective into the density and separation of the formed
     # clusters
    
-    silhouette_avg = silhouette_score(X, cluster_labels)
+    silhouette_avg = silhouette_score(X_distance, cluster_labels,metric='precomputed',random_state=42)
      # Compute the silhouette scores for each sample
-    sample_silhouette_values = silhouette_samples(X, cluster_labels)
+    sample_silhouette_values = silhouette_samples(X_distance, cluster_labels,metric='precomputed',random_state=42)
     y_lower=10
     for i in range(n_clusters):
         # Aggregate the silhouette scores for samples belonging to
@@ -187,8 +194,6 @@ def Silhouette_analysis(X,cluster_labels,n_clusters,out_dir='./',tag=''):
 
     ax1.set_yticks([])  # Clear the yaxis labels / ticks
     ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
-    # Compute the silhouette scores for each sample
-    sample_silhouette_values = silhouette_samples(X, cluster_labels)
 
     y_lower = 10
     
