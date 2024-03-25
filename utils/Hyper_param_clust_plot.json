@@ -1,4 +1,4 @@
-{   "to_process":["/CTGlab/home/valeria/Quantum-Machine-Learning-for-Expression-Data/Results/Unsupervised_100_umap/clustering_100_opt_k_reviewed.csv"],
+{   "to_process":["/CTGlab/home/valeria/Quantum-Machine-Learning-for-Expression-Data/Results/Unsupervised_umap_100_hardware/Prove_CU/clustering_100_opt_k_reviewed.csv"],
     "Scores": ["silhouette","Score_cluster","CHI","DI"]
 
 }

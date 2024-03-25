@@ -95,6 +95,7 @@ K=params["Clustering"]["K"]
 # object With column names only
 df_perf= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','s','geom_distance','concentration','silhouette','Score_cluster','CHI','DI','v_intra','v_inter','N_samples'])
 df_sil= pd.DataFrame(columns = ['ftmap', 'K', 'Bandwidth','silhouette','N_samples']) 
+df_clusters= pd.DataFrame(index=df_tot_sel.index)
 print(df_perf)
 
 ####################################################################################
@@ -114,6 +115,7 @@ for b in bwidth:
         spectral = SpectralClustering(k, affinity="precomputed",n_init=50,random_state=42)
         cluster_labels = spectral.fit_predict(K_classic_tr)
         score_rbf_4,v_intra_rbf4, v_inter_rbf4=Cluster_score(1-K_classic_tr,cluster_labels)
+        df_clusters['Cluster_rbf_'+str(k)+'_'+str(b)]=cluster_labels
 
 
         #CLUSTER EVALUTION:
@@ -168,7 +170,7 @@ for i in glob.glob(dir):
             #CLUSTERING#
             q_spectral = SpectralClustering(k, affinity="precomputed",random_state=42)
             cluster_labels = q_spectral.fit_predict(q_k_tr)
-            
+            df_clusters['Cluster_'+ft_map+'_'+str(k)+'_'+str(b)]=cluster_labels
             #Evaluation#
             #From affinaty to distance
             q_k_dist=1-Scale(q_k_tr,(0,1))
@@ -238,6 +240,7 @@ print('##############CHECK##############')
 print(df_perf[(df_perf.ftmap.isin(['ZZ_linear','Z_linear'])) & (df_perf.Bandwidth==6.28) & (df_perf.K==4)].concentration)
 ##SAVE DF##
 df_perf.to_csv(res_dir+'clustering_{}_opt_k_reviewed.csv'.format(n_samples))
+df_clusters.to_csv(res_dir+'clustering_{}_clusters.csv'.format(n_samples))
 tt
 #############################################################################################################################
 #                                                   PLOT                                                                    #
