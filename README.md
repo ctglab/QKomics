@@ -16,7 +16,7 @@ To avoide problems with the env requirments follow these steps:
 
 3. Install all packages present in requirments.txt
 
-"pip -r requirments.txt"
+"pip install -r requirments.txt"
 
 N.B.
 If there seems to be a problem with pip or condaa and qiskit remember to clean the conda and pip cache before starting  a new env .
