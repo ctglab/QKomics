@@ -23,6 +23,7 @@ from sklearn.preprocessing import MinMaxScaler
 import os
 import json
 import argparse
+from datetime import datetime
 
 #Load parameters
 ap=argparse.ArgumentParser()
@@ -120,11 +121,14 @@ else:
     print('Sorry this script is for Unsupervised learning')
    
 #########################LAUNCH EXP#########################################################
-
+print('Launch experiment')
+print('Set Sampler')
 sampler = Sampler(backend_options={"noise_model": noise_model})
 #Set fidelity
+print('Set fidelity')
 fidelity = ComputeUncompute(sampler=sampler)
 #Set kernel
+print('Set kernel')
 qkernel = FidelityQuantumKernel(feature_map=ft_map_t_qs,fidelity=fidelity)
 # Iterate over the bandwidth values in params['Scaling']['bandwidth']
 for i in params['Scaling']['bandwidth']:
@@ -135,9 +139,11 @@ for i in params['Scaling']['bandwidth']:
     X_train_scaled = scaler.transform(X_train)
     print(X_train_scaled.shape)
     # Evaluate the quantum kernel using the scaled features as inputs
+    t=datetime.now()
     qk = qkernel.evaluate(X_train_scaled, X_train_scaled)
     print(qk.shape)
     print('Kernel evaluated')
+    print('Execution time:',datetime.now()-t)
     # Save the evaluated kernel to a pickle file
     with open(kernel_dir_b+'qk_tot_{}.pickle'.format(i), 'wb') as f:
         pickle.dump(qk, f)
