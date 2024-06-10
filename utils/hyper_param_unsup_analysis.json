@@ -2,7 +2,7 @@
     "Data":{
         "Sampling_size":100,
         "Input_file":"Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
-        "Output_dir":"Results/Unsupervised_umap_100_hardware/Prove_CU/Second-take",
+        "Output_dir":"Results/Unsupervised_umap_100_hardware/Mumbai_CU/",
         "seed":42,
         "encoding": "togheter"
 
@@ -10,7 +10,7 @@
 
     "Kernel":{
         "n_qubits":4,
-        "K_dir":"Kernels_Results/Unsupervised_umap_100_hardware/Prove_CU/Second-take/*"
+        "K_dir":"Kernels_Results/Unsupervised_umap_100_hardware/Mumbai_CU/*"
     },
     "Scaling":{
         "bandwidth":[0.125,0.25,0.5,1,2]
