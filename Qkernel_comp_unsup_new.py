@@ -5,11 +5,17 @@ from datetime import datetime
 import os
 import json
 import argparse
-from qiskit.utils import QuantumInstance, algorithm_globals
-from qiskit import BasicAer
-from qiskit.circuit.library import ZZFeatureMap, ZFeatureMap
-from qiskit_machine_learning.kernels import QuantumKernel
-
+from qiskit_algorithms.utils import algorithm_globals
+#from qiskit import BasicAer
+from qiskit_aer import AerSimulator
+from qiskit.primitives import Sampler, BackendSampler
+#from qiskit_ibm_runtime import Options
+#mport qiskit_ibm_runtime 
+#Load feature maps
+from qiskit.circuit.library import ZZFeatureMap,ZFeatureMap
+#from qiskit.algorithms.state_fidelities import ComputeUncompute
+from Kernels.src.ComputeUncompute import ComputeUncompute
+from qiskit_machine_learning.kernels import FidelityQuantumKernel
 
 from sklearn.preprocessing import MinMaxScaler
 
@@ -39,16 +45,15 @@ f = open(params_dir)
 params= json.load(f)
 
 #########Quantum Session parameters#############
-seed=params['Backend']["seed"]
 backend=params['Backend']["backend"]
 n_qubits=params['Backend']["n_qubits"]
 shots=params['Backend']["shots"]
 
-algorithm_globals.random_seed = seed
+algorithm_globals.random_seed = 12345
 
-#Set instance
-adhoc_backend = QuantumInstance(
-BasicAer.get_backend("qasm_simulator"), shots=shots, seed_simulator=seed, seed_transpiler=seed)
+#Set backend
+backend = AerSimulator(method='automatic',max_parallel_threads=1, max_parallel_experiments=1)
+print(backend.available_devices())
 
 ######################## DATA PREPROCESSING ######################################################
 
@@ -89,7 +94,7 @@ if task=='Unsupervised':
 else:
     print('Sorry this script is for Unsupervised learning')
    
-
+print('X_train shape:',X_train.shape)
 #############COMPUTE QUANTUM KERNELS###################
 
 ###SET Quantum kernel####################
@@ -115,8 +120,12 @@ for key in maps.keys():
     #Build ft map
     feature_map=ft_maps_dict.get(ft)
     feature_map.entanglement=ent
-    adhoc_kernel = QuantumKernel(feature_map=feature_map, quantum_instance=adhoc_backend)
-
+    sampler =BackendSampler(backend=backend,options={'shots':shots})
+    #sampler=Sampler(options={'shots':shots})
+    #Set fidelity
+    fidelity = ComputeUncompute(sampler=sampler)
+    #Set kernel
+    qkernel= FidelityQuantumKernel(feature_map=feature_map,fidelity=fidelity)
     print('#############{}_{}################'.format(ft,ent),flush=True)
     kernel_dir_b= output_dir+'/'+ft+'_'+ent+'/'
     try:
@@ -138,13 +147,14 @@ for key in maps.keys():
         time_k=datetime.now()
         #Compute Training kernel
         qkernel_train=Compute_and_save_kernel(X_train=X_train_scaled,X_test=X_train_scaled,
-                                              adhoc_kernel=adhoc_kernel,dir=kernel_dir_b,tag='{}'.format(b))
+                                              adhoc_kernel=qkernel,dir=kernel_dir_b,tag='{}'.format(b))
         time_k=datetime.now()-time_k
         print('Time employed for  bandwidth {} :'.format(time_k))
             
         
             
-time_tot=datetime.now()-time_start           
+time_tot=datetime.now()-time_start 
+       
 print('Time total {} :'.format(time_tot))
 
   

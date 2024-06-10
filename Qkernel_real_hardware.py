@@ -5,7 +5,7 @@ from qiskit.visualization import *
 # Importing standard Qiskit libraries and configuring account
 from qiskit_ibm_runtime import QiskitRuntimeService, Options
 import qiskit_ibm_runtime 
-#from qiskit.utils import algorithm_globals
+from qiskit_algorithms.utils import algorithm_globals
 #Load feature maps
 from qiskit.circuit.library import ZZFeatureMap,ZFeatureMap
 from qiskit.algorithms.state_fidelities import ComputeUncompute
@@ -32,7 +32,7 @@ args=vars(ap.parse_args())
 params_dir=args['parameters_file']
 
 ############################PARAMETERS#########################################################
-
+algorithm_globals.random_seed = 12345
 ###########Load hyperparameters from json################
 print('Loading Parameters')
 # Opening JSON file

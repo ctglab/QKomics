@@ -95,7 +95,7 @@ ft_map_t_qs.draw('mpl',style='iqp', idle_wires=False,
 # load data and sample
 data_input = pd.read_csv(params['Data']["Input_file"], sep = ",")
 data_input=data_input.sample(n=params['Data']["Sampling_size"],axis=0,random_state=42)
-
+print(data_input.shape,flush=True)
 #SELECT FT
 
 features=[]
@@ -121,11 +121,11 @@ else:
     print('Sorry this script is for Unsupervised learning')
    
 #########################LAUNCH EXP#########################################################
-print('Launch experiment')
-print('Set Sampler')
+print('Launch experiment',flush=True)
+print('Set Sampler',flush=True)
 sampler = Sampler(backend_options={"noise_model": noise_model})
 #Set fidelity
-print('Set fidelity')
+print('Set fidelity',flush=True)
 fidelity = ComputeUncompute(sampler=sampler)
 #Set kernel
 print('Set kernel')
@@ -137,7 +137,7 @@ for i in params['Scaling']['bandwidth']:
     scaler = MinMaxScaler(feature_range=(0, i*np.pi))
     scaler.fit(X_train)
     X_train_scaled = scaler.transform(X_train)
-    print(X_train_scaled.shape)
+    print(X_train_scaled.shape,flush=True)
     # Evaluate the quantum kernel using the scaled features as inputs
     t=datetime.now()
     qk = qkernel.evaluate(X_train_scaled, X_train_scaled)

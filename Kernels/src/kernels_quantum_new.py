@@ -11,7 +11,6 @@ import os
 import pickle
 # From Qiskit
 
-
 def Compute_kernel(X_train,X_test,adhoc_kernel):
     """
     Compute kenel for given data and kernel type

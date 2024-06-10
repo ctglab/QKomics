@@ -1,0 +1,58 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############ZZ_full################
+Creation of the directory ./Kernels_Results/Unsupervised_2000_umap//ZZ_full/ failed. Directory already exist
+./Kernels_Results/Unsupervised_2000_umap//ZZ_full/
+0.125
+(100, 4)
+Time employed for  bandwidth 0:00:23.754687 :
+0.25
+(100, 4)
+Time employed for  bandwidth 0:00:22.611488 :
+0.5
+(100, 4)
+Time employed for  bandwidth 0:00:22.818836 :
+1
+(100, 4)
+Time employed for  bandwidth 0:00:23.056711 :
+2
+(100, 4)
+Time employed for  bandwidth 0:00:22.799389 :
+#############ZZ_linear################
+Creation of the directory ./Kernels_Results/Unsupervised_2000_umap//ZZ_linear/ failed. Directory already exist
+./Kernels_Results/Unsupervised_2000_umap//ZZ_linear/
+0.125
+(100, 4)
+Time employed for  bandwidth 0:00:16.447774 :
+0.25
+(100, 4)
+Time employed for  bandwidth 0:00:16.697097 :
+0.5
+(100, 4)
+Time employed for  bandwidth 0:00:16.417288 :
+1
+(100, 4)
+Time employed for  bandwidth 0:00:16.599496 :
+2
+(100, 4)
+Time employed for  bandwidth 0:00:16.538920 :
+#############Z_full################
+Creation of the directory ./Kernels_Results/Unsupervised_2000_umap//Z_full/ failed. Directory already exist
+./Kernels_Results/Unsupervised_2000_umap//Z_full/
+0.125
+(100, 4)
+Time employed for  bandwidth 0:00:10.298876 :
+0.25
+(100, 4)
+Time employed for  bandwidth 0:00:10.288213 :
+0.5
+(100, 4)
+Time employed for  bandwidth 0:00:10.237808 :
+1
+(100, 4)
+Time employed for  bandwidth 0:00:10.199390 :
+2
+(100, 4)
+Time employed for  bandwidth 0:00:10.366639 :
+Time total 0:04:09.239079 :
