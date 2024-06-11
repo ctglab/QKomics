@@ -1,29 +1,14 @@
 {
     "Data":{
-        "Sampling_size":2000,
+        "Sampling_size":500,
         "task":"Unsupervised",
         "encoding":"togheter",
         "Input_file":"./Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
-        "Output_dir":"./Kernels_Results/Unsupervised_2000_umap/"
+        "Output_dir":"./Kernels_Results/Unsupervised_500_umap/"
 
     },
 
     "ft_maps":{
-        "maps":{
-            
-            "ZZ_linear":{
-                "ft_map":"ZZ",
-                "ent_type":"linear"
-            },
-            "Z":{
-                "ft_map":"Z",
-                "ent_type":"full"
-            }
-        }, 
-        "n_reps":1
-
-    },
-    "ft_maps_out":{
         "maps":{
             "ZZ_full":{
                 "ft_map":"ZZ",
@@ -51,7 +36,7 @@
 
     },
     "Scaling":{
-        "bandwidth":[0.125,0.25]
+        "bandwidth":[0.125,0.25,0.5,1,2]
     }
 
 }
