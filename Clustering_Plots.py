@@ -48,8 +48,7 @@ def Plot_score(df,score,out_dir):
         y="K",s=100,
         sizes=(10, 200),
         height=6, aspect=1.25,
-        
-        
+              
     )
 
     g.ax.xaxis.grid(True, "minor", linewidth=.25)

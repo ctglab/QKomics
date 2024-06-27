@@ -75,7 +75,7 @@ labels = 'IntClustMemb'
 print(features)
 
 ########SAMPLING###################################
-df_tot_sel=data_input.sample(n=min(sampling_sz,len(data_input)),random_state=params['Data']["seed"])
+df_tot_sel=data_input.sample(n=min(samp_size,len(data_input)),random_state=params['Data']["seed"])
 y_train=df_tot_sel[labels].to_numpy()
 X_train=df_tot_sel[features]
 print(df_tot_sel)

@@ -64,6 +64,7 @@ def Cluster_score(dist_matrix,labels):
     #Score
     score=1-(m_intra/m_inter)
     return score, v_intra, v_inter
+
 def Dunn_index(dist_matrix,labels):
     intra_cluster,inter_cluster=calculate_intra_inter_distances(dist_matrix,labels)
     min_inter=min(inter_cluster)
