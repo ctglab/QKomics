@@ -52,7 +52,7 @@ shots=params['Backend']["shots"]
 algorithm_globals.random_seed = 12345
 
 #Set backend
-backend = AerSimulator(method='automatic',max_parallel_threads=0, max_parallel_experiments=0, max_parallel_shots=0)
+backend = AerSimulator(method='statevector',max_parallel_threads=0, max_parallel_experiments=0, max_parallel_shots=0)
 print(backend.available_devices())
 
 ######################## DATA PREPROCESSING ######################################################

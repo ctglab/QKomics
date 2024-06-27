@@ -1,0 +1,16 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############Z_full################
+Creation of the directory ./Kernels_Results/Unsupervised_2000_umap_old//Z_full/ failed. Directory already exist
+./Kernels_Results/Unsupervised_2000_umap_old//Z_full/
+0.5
+(1980, 4)
+Time employed for  bandwidth 3:21:24.388818 :
+1
+(1980, 4)
+Time employed for  bandwidth 3:25:14.008308 :
+2
+(1980, 4)
+Time employed for  bandwidth 3:27:43.004005 :
+Time total 10:14:21.861949 :

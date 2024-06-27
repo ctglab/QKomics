@@ -1,0 +1,13 @@
+Loading Parameters
+create X_train
+Set Q kernel
+#############Z_full################
+Successfully created the directory ./Kernels_Results/Unsupervised_500_umap_old//Z_full/ 
+./Kernels_Results/Unsupervised_500_umap_old//Z_full/
+0.125
+(500, 4)
+Time employed for  bandwidth 0:16:33.453900 :
+0.25
+(500, 4)
+Time employed for  bandwidth 0:16:34.265621 :
+Time total 0:33:07.750953 :

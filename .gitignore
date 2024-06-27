@@ -5,4 +5,5 @@
 *slurm*
 *.png
 ./Kernels_Results/Unsupervised_prova/
+*.sh
 
