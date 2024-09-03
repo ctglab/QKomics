@@ -13,8 +13,7 @@ from qiskit.primitives import Sampler, BackendSampler
 #mport qiskit_ibm_runtime 
 #Load feature maps
 from qiskit.circuit.library import ZZFeatureMap,ZFeatureMap
-#from qiskit.algorithms.state_fidelities import ComputeUncompute
-from Kernels.src.ComputeUncompute import ComputeUncompute
+from qiskit.algorithms.state_fidelities import ComputeUncompute
 from qiskit_machine_learning.kernels import FidelityQuantumKernel
 
 from sklearn.preprocessing import MinMaxScaler
@@ -52,7 +51,7 @@ shots=params['Backend']["shots"]
 algorithm_globals.random_seed = 12345
 
 #Set backend
-backend = AerSimulator(method='statevector',max_parallel_threads=0, max_parallel_experiments=0, max_parallel_shots=0)
+backend = AerSimulator(method='automatic',max_parallel_threads=0, max_parallel_experiments=0, max_parallel_shots=0)
 print(backend.available_devices())
 
 ######################## DATA PREPROCESSING ######################################################

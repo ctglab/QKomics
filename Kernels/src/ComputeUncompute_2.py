@@ -124,7 +124,8 @@ class ComputeUncompute_2(BaseStateFidelity):
        
         #transpile circuit
         circuit=self.transpile_circuit(circuit)
-        circuit.measure_active() 
+        print('transpiled circuit')
+        circuit.measure_all() 
     
         return circuit
    

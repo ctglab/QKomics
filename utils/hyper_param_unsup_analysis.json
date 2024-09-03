@@ -1,8 +1,8 @@
 {
     "Data":{
-        "Sampling_size":2000,
+        "Sampling_size":800,
         "Input_file":"Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
-        "Output_dir":"Results/Unsupervised_2000_umap/",
+        "Output_dir":"Results/Unsupervised_100_umap_Brisbane/",
         "seed":42,
         "encoding": "togheter"
 
@@ -10,7 +10,7 @@
 
     "Kernel":{
         "n_qubits":4,
-        "K_dir":"Kernels_Results/Unsupervised_2000_umap_old/*"
+        "K_dir":"Kernels_Results/Brisbane/*"
     },
     "Scaling":{
         "bandwidth":[0.125,0.25,0.5,1,2]

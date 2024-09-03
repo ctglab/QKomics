@@ -67,7 +67,48 @@ def Plot_score(df,score,out_dir):
     plt.close()
     return 0
 
+def Plot_score_heatmap(df,score,out_dir):
+   
+    
+    #map bandwidth
+    df[r'$\beta$']=df['Max angle'].map({0.125:r'$\frac{\pi}{8}$',0.25:r'$\frac{\pi}{4}$',0.5:r'$\frac{\pi}{2}$',1:r'$\pi$',2:r'$2\pi$'})
+    #map rbf beta to 1
+    df.loc[df.ftmap=='rbf',r'$\beta$']='1'
+    label_x=[r'$\frac{\pi}{8}$', r'$\frac{\pi}{4}$', r'$\frac{\pi}{2}$', r'$\pi$', r'$2\pi$']
+    cmap_new=sns.color_palette("Reds", as_cmap=True)
+    fig, axs = plt.subplots(1, 4, figsize=(18, 5),gridspec_kw={'width_ratios': [1,3,3,3]})
+    sns.set_theme(style="whitegrid")
 
+    for i, ftmap in enumerate(['rbf','Z','ZZ_linear','ZZ_full']):
+        print(ftmap)
+
+        # Pivot the DataFrame
+        new_df = df[df.ftmap==ftmap].pivot(index='K', columns=r'$\beta$', values='silhouette')
+        if ftmap!='rbf':
+            new_df=new_df.reindex(label_x,axis=1)
+        
+        # Disable LaTeX interpreter
+        plt.rcParams['text.usetex'] = False
+        
+        # Plot the heatmap in the corresponding subplot
+        ax = axs[i]
+        sns.heatmap(new_df, annot=True, linewidth=.5, vmin=0, vmax=0.65, cmap=cmap_new, ax=ax)
+        
+        # Set the subplot title
+        ax.set_title(ftmap)
+        
+        # Set the x and y labels
+        ax.set(xlabel=r'$\beta$', ylabel='K')
+        
+        # Set the x tick labels
+    # ax.set_xticklabels(label_x, rotation=50, fontsize=10)
+
+    # Adjust the layout    
+    plt.tight_layout()
+    #save
+    plt.savefig(out_dir+'heatmap_{}.png'.format(score),dpi=300)
+    plt.close()
+    return 0
 
 
 
@@ -98,6 +139,7 @@ for path in results_to_process:
     print(outdir)
     #Preproces
     df=Parse_data(df=df) 
+    print(df.head())
    
     for sc in scores:
         print(sc)
@@ -106,6 +148,8 @@ for path in results_to_process:
             Plot_trend(df=df,score=sc,out_dir=outdir)
             #Plot score opt
             Plot_score(df=df,score=sc,out_dir=outdir)
+            #Plot heatmap
+            Plot_score_heatmap(df=df,score=sc,out_dir=outdir)
         else:
             print('{} not in df'.format(sc))
 

@@ -52,10 +52,10 @@ else:
 # Loading your IBM Quantum account(s)
 print('Loading IBM Quantum account')
 # Loading your IBM Quantum account(s)
-service=QiskitRuntimeService(channel="ibm_quantum",token="95e70510a429e03c7cc4ce4c5c979c794135dbacffbebe5325dcd8b627cfe42c9f61e91945ba1adea992f81849c74cc5e0ed1ab93977db5084dd26a28fd25dd8")
+service=QiskitRuntimeService(channel="ibm_quantum",token="79236d6c79212a19f624756d3159ff4df842f676670b41257e20c724564c32de79977c3dff09e568097402b8c0ffb0f565aa511a772f2f9d6a1631835ca183a1")
 print('selecting backend')
-#backend=service.get_backend(params['Backend']["backend"])
-backend = service.least_busy(operational=True, simulator=False)
+backend=service.get_backend(params['Backend']["backend"])
+#backend = service.least_busy(operational=True, simulator=False)
 #service.least_busy(simulator=False,
                              #operational=True,
                              #min_num_qubits=5)#service.get_backend(params['Backend']["backend"])
@@ -78,7 +78,7 @@ ft_map.decompose(reps=1).draw('mpl',style="bw",cregbundle=False,fold=-1,initial_
 #ft_map.draw(output='mpl')
 #transpile circuit
 print('transpile circuit')
-pm=generate_preset_pass_manager(optimization_level=3,coupling_map=coupling_map,initial_layout=[0,1,2,3],layout_method='trivial',seed_transpiler=42)
+pm=generate_preset_pass_manager(optimization_level=1,target=backend.target,initial_layout=[0,1,2,3],layout_method='trivial',seed_transpiler=42)
 ft_map_t_qs = pm.run(ft_map)
 ft_map_t_qs.draw('mpl',style='iqp', idle_wires=False,
                 filename='images/{}_{}_transpiled_isa.png'.format(params['ft_map']["ft_map"],params['ft_map']['ent_type']))
@@ -105,7 +105,9 @@ else:
     for i in range(1,int(n_qubits) +1):
         name_='Component_'+str(i)
         features.append(name_)
-labels = 'IntClustMemb'
+#labels = 'IntClustMemb'
+#@TODO: Change label to the correct one
+labels='label'
 
 #Preprocess according to task
 data_dict={}
@@ -135,7 +137,7 @@ sampler = qiskit_ibm_runtime.Sampler(backend=backend, options=options)
 #Set fidelity
 fidelity = ComputeUncompute_2(sampler=sampler,pm=pm)
 #Set kernel
-qkernel = FidelityQuantumKernel(feature_map=ft_map,fidelity=fidelity)
+qkernel = FidelityQuantumKernel(feature_map=ft_map,fidelity=fidelity,max_circuits_per_job=100)
 # Iterate over the bandwidth values in params['Scaling']['bandwidth']
 for i in params['Scaling']['bandwidth']:
     print(i)

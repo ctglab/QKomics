@@ -1,10 +1,10 @@
 {
     "Data":{
-        "Sampling_size":1000,
+        "Sampling_size":60,
         "task":"Unsupervised",
         "encoding":"togheter",
-        "Input_file":"./Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
-        "Output_dir":"./Kernels_Results/Unsupervised_umap_1000_noisy_sim/FakeMumbai/"
+        "Input_file":"./Input_data/data_example_anonim.csv",
+        "Output_dir":"./Kernels_Results/Test"
 
     },
 
@@ -17,15 +17,15 @@
     "Backend":{
         "shots":2000,
         "n_qubits":4,
-        "backend":"ibmq_mumbai",
+        "backend":"ibm_kyoto",
         "seed":12345,
-        "initial_layout":[0,1,2,4],
+        "initial_layout":[0,1,2,3],
         "optimization_level":1,
         "resilience_level":1
 
     },
     "Scaling":{
-        "bandwidth":[0.125,0.25,0.5,1,2]
+        "bandwidth":[0.125]
     }
 
 }
