@@ -1,9 +1,0 @@
-Loading Parameters
-('CPU',)
-create X_train
-X_train shape: (1980, 4)
-Set Q kernel
-#############ZZ_linear################
-Successfully created the directory ./Kernels_Results/Unsupervised_2000_umap//ZZ_linear/ 
-./Kernels_Results/Unsupervised_2000_umap//ZZ_linear/
-0.125

@@ -1,8 +1,0 @@
-Loading Parameters
-create X_train
-Set Q kernel
-#############ZZ_full################
-Creation of the directory ./Kernels_Results/Unsupervised_1000_3q//ZZ_full/ failed. Directory already exist
-./Kernels_Results/Unsupervised_1000_3q//ZZ_full/
-0.125
-(1000, 6)
