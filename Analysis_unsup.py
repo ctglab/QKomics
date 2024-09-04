@@ -17,7 +17,7 @@ from Kernels.src.Analysis.Clustering import *
 from Kernels.src.Analysis.Kernel import *
 
 #QuAsk
-from quask.metrics import calculate_geometric_difference,calculate_model_complexity 
+#from quask.metrics import calculate_geometric_difference,calculate_model_complexity 
 
 
 ap=argparse.ArgumentParser()
@@ -105,9 +105,11 @@ print(df_perf)
 K_classic_tr = Compute_rbf_kernel(X_train,X_train)
 
 #Geometric difference
-g_diff=calculate_geometric_difference(K_classic_tr,K_classic_tr)
+#TO CHANGE
+
+g_diff= 0#calculate_geometric_difference(K_classic_tr,K_classic_tr)
 conc_ck=Kernel_concentration(K_classic_tr)
-sc=calculate_model_complexity(K_classic_tr,y_train)
+sc=0#calculate_model_complexity(K_classic_tr,y_train)
 
 for b in bwidth:
     for k in K:
@@ -215,8 +217,8 @@ for i in glob.glob(dir):
             # plt.close(g_diff_4.fig)
             
             #metrics quask
-            qkg_diff=calculate_geometric_difference(K_classic_tr,q_k_tr)
-            sq=calculate_model_complexity(q_k_tr,y_train)
+            qkg_diff=0#calculate_geometric_difference(K_classic_tr,q_k_tr)
+            sq=0#calculate_model_complexity(q_k_tr,y_train)
             #Add to df
             df_perf.loc[len(df_perf)]={'ftmap' : ft_map, 
                                     'K' : k, 
