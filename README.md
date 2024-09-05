@@ -1,9 +1,10 @@
 # Quantum-Machine-Learning-for-Expression-Data
-Classification of tumour sub types using  expression data
+Stratification  of tumour samples from molecular descriptors (gene expression and copy number alteration) with quantum Kernels
 ## Input data
-## Scripts
+Input data contains the METABRIC dataset reduced with UMAP and the notebook to see the dimentionality recuction step. 
+## Scripts  
 ## Results
-## N.B env requirments
+## Requirments
 To avoide problems with the env requirments follow these steps:
 
 1. Create conda env with python 3.10
@@ -17,9 +18,5 @@ To avoide problems with the env requirments follow these steps:
 3. Install all packages present in requirments.txt
 
 "pip install -r requirments.txt"
-
-N.B.
-If there seems to be a problem with pip or condaa and qiskit remember to clean the conda and pip cache before starting  a new env .
-:)
 
 
