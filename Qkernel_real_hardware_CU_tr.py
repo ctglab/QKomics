@@ -72,8 +72,9 @@ if params['ft_map']["ft_map"]=='ZZ':
 else:
     ft_map = ZFeatureMap(feature_dimension=n_qubits, reps=1)
 
+#Print FTMAP
 ft_map.decompose(reps=1).draw('mpl',style="bw",cregbundle=False,fold=-1,initial_state=True,
-                              filename='images/{}_{}.png'.format(params['ft_map']["ft_map"],params['ft_map']['ent_type']))
+                              filename='{}_{}.png'.format(params['ft_map']["ft_map"],params['ft_map']['ent_type']))
 
 #ft_map.draw(output='mpl')
 #transpile circuit
@@ -81,7 +82,7 @@ print('transpile circuit')
 pm=generate_preset_pass_manager(optimization_level=1,target=backend.target,initial_layout=[0,1,2,3],layout_method='trivial',seed_transpiler=42)
 ft_map_t_qs = pm.run(ft_map)
 ft_map_t_qs.draw('mpl',style='iqp', idle_wires=False,
-                filename='images/{}_{}_transpiled_isa.png'.format(params['ft_map']["ft_map"],params['ft_map']['ent_type']))
+                filename='{}_{}_transpiled_isa.png'.format(params['ft_map']["ft_map"],params['ft_map']['ent_type']))
 
 
 ######################## DATA PREPROCESSING ######################################################
@@ -105,10 +106,7 @@ else:
     for i in range(1,int(n_qubits) +1):
         name_='Component_'+str(i)
         features.append(name_)
-#labels = 'IntClustMemb'
-#@TODO: Change label to the correct one
-labels='label'
-
+labels = 'IntClustMemb'
 #Preprocess according to task
 data_dict={}
 print('create X_train',flush=True)
@@ -137,7 +135,7 @@ sampler = qiskit_ibm_runtime.Sampler(backend=backend, options=options)
 #Set fidelity
 fidelity = ComputeUncompute_2(sampler=sampler,pm=pm)
 #Set kernel
-qkernel = FidelityQuantumKernel(feature_map=ft_map,fidelity=fidelity,max_circuits_per_job=100)
+qkernel = FidelityQuantumKernel(feature_map=ft_map,fidelity=fidelity)
 # Iterate over the bandwidth values in params['Scaling']['bandwidth']
 for i in params['Scaling']['bandwidth']:
     print(i)
