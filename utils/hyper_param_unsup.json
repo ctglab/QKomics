@@ -1,0 +1,42 @@
+{
+    "Data":{
+        "Sampling_size":10,
+        "task":"Unsupervised",
+        "encoding":"togheter",
+        "Input_file":"./Input_data/UMAP_METABRIC_4cmp_IC10_full.csv",
+        "Output_dir":"./Test"
+
+    },
+
+    "ft_maps":{
+        "maps":{
+            "Z":{
+                "ft_map":"Z",
+                "ent_type":"full"
+            },
+            "ZZ_linear":{
+                "ft_map":"ZZ",
+                "ent_type":"linear"
+            },
+            "ZZ_full":{
+                "ft_map":"Z",
+                "ent_type":"full"
+            }
+        }, 
+        "n_reps":1
+
+    },
+
+
+    "Backend":{
+        "shots":2000,
+        "n_qubits":4,
+        "backend":"qasm_simulator",
+        "seed":12345
+
+    },
+    "Scaling":{
+        "bandwidth":[0.125,0.25]
+    }
+
+}
