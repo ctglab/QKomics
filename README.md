@@ -13,15 +13,21 @@ To avoide problems with the env requirments follow these steps:
 
 1. Create conda env with python 3.10
 
-"conda create -n <your_env_name> python==3.10"
+```
+conda create -n <your_env_name> python==3.10
+```
 
 2. Activate env
 
-"conda activate <your_env_name> "
+```
+conda activate <your_env_name>
+```
 
 3. Install all packages present in requirments.txt
 
-"pip install -r requirments.txt"
+```
+pip install -r requirments.txt
+```
 
 ### Usage
 
