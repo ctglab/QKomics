@@ -1,4 +1,4 @@
-# Quantum-Machine-Learning-for-Expression-Data
+# Quantum enhanced stratification of Breast Cancer: exploring quantum expressivity for real omics data
 Stratification  of tumour samples from molecular descriptors (gene expression and copy number alteration) with quantum Kernels
 ## Input data
 Input data contains the METABRIC dataset reduced with UMAP and the notebook to see the dimentionality recuction step. 
