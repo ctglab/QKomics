@@ -52,7 +52,7 @@ else:
 # Loading your IBM Quantum account(s)
 print('Loading IBM Quantum account')
 # Loading your IBM Quantum account(s)
-service=QiskitRuntimeService(channel="ibm_quantum",token="79236d6c79212a19f624756d3159ff4df842f676670b41257e20c724564c32de79977c3dff09e568097402b8c0ffb0f565aa511a772f2f9d6a1631835ca183a1")
+service=QiskitRuntimeService(channel="ibm_quantum",token="YOUR_TOKEN")
 print('selecting backend')
 backend=service.get_backend(params['Backend']["backend"])
 #backend = service.least_busy(operational=True, simulator=False)
