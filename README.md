@@ -4,7 +4,7 @@ Stratification  of tumour samples from molecular descriptors (gene expression an
 Input data contains the METABRIC dataset reduced with UMAP and the notebook to see the dimentionality recuction step. 
 ## Scripts  
 ## Results
-## Requirments
+## Packages Requirments and usage
 To avoide problems with the env requirments follow these steps:
 
 1. Create conda env with python 3.10
@@ -19,4 +19,24 @@ To avoide problems with the env requirments follow these steps:
 
 "pip install -r requirments.txt"
 
+### Usage
 
+Launch noisless Quantum Kernel simulation:
+
+```
+python Qkernel_comp_unsup_simulation.py -params utils/hyper_param_unsup.json 
+```
+
+Launch QPU Quantum Kernel computation:
+
+```
+python Qkernel_real_hardware_CU_tr.py -params utils/Qkernel_real_hardware_CU_tr.py
+
+```
+
+Launch clustering of a given set of kernels and compute Silhouette scores
+
+```
+python Analysis_unsup.py -params utils/hyper_param_unsup_analysis.json
+
+```
