@@ -1,6 +1,6 @@
 */*_prova
 .pycache/
-/Kernels/src/__pycache__
+Kernels/src/__pycache__
 /Kernels/src/Analysis/__pycache__
 *slurm*
 *.png
